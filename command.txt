@@ -1,0 +1,31 @@
+to view all running container           docker ps
+ssh in container                        docker exec -it containerId bash
+
+Connect to db                           mongosh mongodb://localhost:27017 -u rootuser -p rootpass (mongodb before :// is the protocol used, like http)
+                                        NB: in the course mongo command is used, but it's not a thing anymore it's mongosh
+
+Check os version in distro              cat /etc/os-release
+path of executable x                    which x
+
+List databases                          show dbs;
+List collections                        show collections;
+Create database or use existing         use myNewDatabase;
+
+following commands can be viewed in     db.help();
+get current connection                  db.getMongo()
+Check which database you are using      db.getName();
+drop database                           db.dropDatabase()
+Create collection                       db.createCollection('myNewCollection'); (collection is like a table in sql, so it's inside a specific database,
+                                        document is a like a row in sql, so it's inside a specific collection)
+See stats of a collection               db.myNewCollection.stats()
+drop collection                         db.myNewCollection.drop()
+insert document                         db.myNewCollection.insertOne({name: 'Max', age: 29}) (the document is a bson object, binary representation of json)
+                                        NB: in the course insert is used, but it's deprecated so use insertOne or insertMany
+                                        when you insert in a collection a _id field is automatically created with the value ObjectId("randomId"), it serves primary key
+                                        you could also specify _id field with a value of your choice
+
+alternative way to create a collection: create a document, paste it in the mongo shell and run          db.myNewCollection.insertOne(myNewDocument);
+query a collection                      db.myCollection.find().pretty(); (equivalent to select * from table)
+count documents in a collection         db.myCollection.countDocuments();
+                                        NB: in the course count is used, but it's deprecated so use countDocuments
+
