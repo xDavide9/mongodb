@@ -1,0 +1,38 @@
+# watch out for docker-compose.yml syntax
+services:
+    mongodb:  # the database server itself
+        image: mongo
+        container_name: mongodb
+        ports: 
+            - 27017:27017  # if i wanted for example to run a different version of mongo on my docker i would just create another service and specify ports: - 27018:27017 because the container port is the same but i change the host port (and of course the mongodb version of image pulled)
+        volumes: 
+            - data:/data
+        environment: # specify enviroment variables as yml list where each one is in the format key=value
+            - MONGO_INITDB_ROOT_USERNAME=rootuser  # this is just like postgres or any other database server, rootuser configured during installation of the server
+            - MONGO_INITDB_ROOT_PASSWORD=rootpass
+        networks:
+            - mongodb_network    
+    mongo-express:  # this is a client just like pgadmin
+        image: mongo-express
+        container_name: mongo-express
+        restart: unless-stopped  # restart unless-stopped allows the container to restart when it crashes unless i stopped it myself
+        ports:
+            - 8081:8081
+        networks:
+            - mongodb_network     
+        environment:
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser  # let's connect via root user
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+            - ME_CONFIG_MONGODB_SERVER=mongodb  # this one is important because it must be the service name (not the container name that one is just for displaying, anyways it is possible to make them the same with container_name attribute) of mongo image (mongodb) because it then connects to it via network
+            - ME_CONFIG_BASICAUTH=true  # by default mongo-express is accessible without auth so enable basic auth
+            - ME_CONFIG_BASICAUTH_USERNAME=admin  # login to mongo-express with these credentials
+            - ME_CONFIG_BASICAUTH_PASSWORD=password
+volumes: 
+    data: # simple data volume not to lose data if the container is destroyed
+
+    # could be using default network in this simple example but better to set up a named volume 
+    # because a default network is created and connects all the services in a docker compose file
+networks:
+    mongodb_network:
+
+        # learn about drivers for networks in docker
