@@ -56,4 +56,15 @@ deleting a field of a document          db.student.updateOne({firstName: "Cally"
 deleting documents                      db.student.deleteOne({name: "Cally"});
                                         db.student.deleteMany(gender: "M");
 
+cursor                                  let cursor = db.student.find();
+                                        find returns only the first 20 documents, to get the rest you have to iterate the cursor object
+                                        cursor.skip(10); cursor.limit(5); cursor.sort({age: 1}); (ascending) cursor.sort({age: -1}); (descending)
+                                        cursor.hasNext();
+                                        cursor.next();
+                                        cursor.forEach(student => print(student.firstName))
+                                        remember the console is interactive js
+                                        e.g. db.student.find().forEach(s => print(`Hello, my name is ${s.firstName}`))
+
+
+
 
