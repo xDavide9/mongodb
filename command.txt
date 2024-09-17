@@ -1,3 +1,4 @@
+SHORT DESCRIPTION                       COMMAND (AND MORE DESCRIPTION)
 to view all running container           docker ps
 ssh in container                        docker exec -it containerId bash
 
@@ -24,8 +25,35 @@ insert document                         db.myNewCollection.insertOne({name: 'Max
                                         when you insert in a collection a _id field is automatically created with the value ObjectId("randomId"), it serves primary key
                                         you could also specify _id field with a value of your choice
 
-alternative way to create a collection: create a document, paste it in the mongo shell and run          db.myNewCollection.insertOne(myNewDocument);
+alternative way to create a collection  db.myNewCollection.insertOne(myNewDocument);
+
+another way to create a collection      db.myCollection.insertMany(myArrayOfDocuments);
+
 query a collection                      db.myCollection.find().pretty(); (equivalent to select * from table)
 count documents in a collection         db.myCollection.countDocuments();
                                         NB: in the course count is used, but it's deprecated so use countDocuments
+
+querying with find                      db.myCollection.find(obj1, obj2); (where obj1 is the filter, and obj2 is the projection)
+                                        e.g. db.student.find({age: 18}, {firstName: 1, _id: 0}).pretty(); (this will return all students with age 18, but only their firstName)
+                                        in the project 1 is used to include fields
+                                        0 is used to exclude fields, and it selects all the other ones
+counting                                append .find();
+
+query operators                         specify in the filter of find $eq $ne $gt $gte $lt $lte
+                                        you can query with arrays using $in, $nin, $all
+                                        e.g. db.student.find({$and: [{totalSpentInBooks: {$gt: 50}}, {totalSpentInBooks: {$lt: 100}}]}, {firstName: 1, _id: 0})
+
+updating documents                      db.myCollection.updateOne({_id: ObjectId(...)}, {$set: {firstName: "Maria"}})
+                                        other operators such as $inc, $mul, $rename...
+                                        NB. in the course update is used, but it's deprecated so use updateOne or updateMany
+                                        if you are updating arrays you can use stuff like $pull, $push, $pop...
+                                        db.student.updateOne({firstName: "Cally"}, {$rename: {firstName: "name"}});
+                                        db.student.updateOne({name: "Cally"}, {$pop: {favouriteSubjects: 1}})
+
+deleting a field of a document          db.student.updateOne({firstName: "Cally"}, {$unset: {lastName: 1}});
+                                        unlike sql, I can just delete a field of a document because there is no forced schema
+
+deleting documents                      db.student.deleteOne({name: "Cally"});
+                                        db.student.deleteMany(gender: "M");
+
 
