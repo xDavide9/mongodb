@@ -1,4 +1,4 @@
-student = {
+const student = {
     "firstName": "Retha",
     "lastName": "Killeen",
     "email": "rkilleen0@mysql.com",
@@ -11,9 +11,9 @@ student = {
         "it"
     ],
     "totalSpentInBooks": 0.00
-}
+};
 
-students = [
+export const students = [
     {
         "firstName": "Retha",
         "lastName": "Killeen",
@@ -138,4 +138,4 @@ students = [
         ],
         "totalSpentInBooks": 165.00
     }
-]
+];

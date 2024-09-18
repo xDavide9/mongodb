@@ -1,0 +1,30 @@
+{
+  "name": "mongo",
+  "version": "1.0.0",
+  "description": "simple application to connect a mongodb running in docker and run some commands on it",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xDavide9/mongodb.git"
+  },
+  "type": "module",
+  "keywords": [
+    "mongodb",
+    "mongo",
+    "nodejs",
+    "database",
+    "db"
+  ],
+  "author": "xDavide9",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xDavide9/mongodb/issues"
+  },
+  "homepage": "https://github.com/xDavide9/mongodb#readme",
+  "dependencies": {
+    "mongodb": "^6.9.0"
+  }
+}
