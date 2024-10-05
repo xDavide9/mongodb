@@ -1,0 +1,6 @@
+after learning how to use mongodb in the shell locally it's important to consider the real world scenario:
+the best way to use mongodb is to use it as a service, so you don't have to worry about the server, the backups, the security, the scaling...
+you can use mongodb atlas, which is the official mongodb service which is free to use for small projects
+and if you want to expand it you could run on aws, azure, or google cloud
+
+to connect to your databases you could use a shell like mongosh, or gui clients like mongo-express, mongo compass or jetbrains' datagrip
